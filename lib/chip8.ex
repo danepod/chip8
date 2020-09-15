@@ -30,6 +30,4 @@ defmodule Chip8 do
 
     Disassembler.disassemble(<<hi1, lo1, hi2, lo2>>)
   end
-
-  def tick(<<>>), do: :ok
 end
