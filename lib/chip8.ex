@@ -1,6 +1,6 @@
 defmodule Chip8 do
-  def disassemble do
-    {:ok, binary} = File.read("blinky.ch8")
+  def disassemble(filename \\ "blinky") do
+    {:ok, binary} = File.read(filename <> ".ch8")
 
     binary |> IO.inspect(base: :hex)
 
@@ -15,7 +15,7 @@ defmodule Chip8 do
       end)
       |> Enum.join("\n")
 
-    File.write("blinky_disasm", disasm)
+    File.write(filename <> ".disasm", disasm)
 
     :ok
   end

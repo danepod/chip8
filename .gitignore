@@ -24,4 +24,4 @@ chip8-*.tar
 
 # Ignore ROMs and disassemblies
 *.ch8
-*_disasm
+*.disasm
