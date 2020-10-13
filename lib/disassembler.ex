@@ -34,7 +34,8 @@ defmodule Disassembler do
   def disassemble(<<0xF, x, 5, 5>>), do: ""
   def disassemble(<<0xF, x, 6, 5>>), do: ""
 
-  def disassemble(<<n1, n2, n3, n4>>), do: "NOT IMPLEMENTED: #{print(<<n1::4>>, <<n2::4>>, <<n3::4>>, <<n4::4>>)}"
+  def disassemble(<<n1, n2, n3, n4>>),
+    do: "NOT IMPLEMENTED: #{print(<<n1::4>>, <<n2::4>>, <<n3::4>>, <<n4::4>>)}"
 
   defp print(<<nibble1::4>>, <<nibble2::4>>), do: "#{print_char(nibble1)}#{print_char(nibble2)}"
 

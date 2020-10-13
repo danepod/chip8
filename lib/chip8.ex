@@ -4,11 +4,16 @@ defmodule Chip8 do
 
     binary |> IO.inspect(base: :hex)
 
-    disasm = Enum.with_index(for <<byte1 :: 8, byte2 :: 8 <- binary>> do tick(byte1, byte2) end)
-    |> Enum.map(fn {disasm, pc} ->
-      IO.inspect("#{inspect(0x200 + pc * 4, base: :hex)}    #{disasm}")
-    end)
-    |> Enum.join("\n")
+    disasm =
+      Enum.with_index(
+        for <<byte1::8, byte2::8 <- binary>> do
+          tick(byte1, byte2)
+        end
+      )
+      |> Enum.map(fn {disasm, pc} ->
+        IO.inspect("#{inspect(0x200 + pc * 4, base: :hex)}    #{disasm}")
+      end)
+      |> Enum.join("\n")
 
     File.write("blinky_disasm", disasm)
 
