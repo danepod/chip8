@@ -11,7 +11,7 @@ defmodule Chip8 do
         end
       )
       |> Enum.map(fn {disasm, pc} ->
-        IO.inspect("#{inspect(0x200 + pc * 4, base: :hex)}    #{disasm}")
+        IO.inspect("#{inspect(0x200 + pc * 2, base: :hex)}    #{disasm}")
       end)
       |> Enum.join("\n")
 
