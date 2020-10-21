@@ -1,6 +1,19 @@
 defmodule Chip8 do
+  def run(filename \\ "blinky") do
+    binary = load_file(filename)
+
+    binary =
+      for <<byte1::8, byte2::8 <- binary>> do
+        <<byte1, byte2>>
+      end
+
+    {:ok, pid} = GenServer.start(Memory, binary)
+
+    pid
+  end
+
   def disassemble(filename \\ "blinky") do
-    {:ok, binary} = File.read(filename <> ".ch8")
+    binary = load_file(filename)
 
     binary |> IO.inspect(base: :hex)
 
@@ -20,7 +33,13 @@ defmodule Chip8 do
     :ok
   end
 
-  def tick(byte1, byte2) do
+  defp load_file(filename) do
+    {:ok, binary} = File.read(filename <> ".ch8")
+
+    binary
+  end
+
+  defp tick(byte1, byte2) do
     hi1 = Bitwise.>>>(byte1, 4)
     lo1 = Bitwise.&&&(byte1, 0x0F)
 
