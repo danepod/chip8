@@ -65,8 +65,7 @@ defmodule Memory do
   end
 
   def init(rom) do
-    addresses = Enum.take_every(0x200..(length(rom) + 0x200), 2)
-
+    addresses = Enum.take_every(0x200..(length(rom) * 2 + 0x200), 2)
     rom = Enum.zip(addresses, rom) |> Map.new()
 
     {:ok, rom}
