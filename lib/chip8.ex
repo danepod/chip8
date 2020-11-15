@@ -7,9 +7,13 @@ defmodule Chip8 do
         <<byte1, byte2>>
       end
 
-    {:ok, pid} = GenServer.start(Memory, binary)
+    # Initialize registers
+    {:ok, vm_pid} = VM.start()
 
-    pid
+    # Initialize memory, load game
+    {:ok, mem_pid} = Memory.start(binary)
+
+    {:ok, vm_pid, mem_pid}
   end
 
   def disassemble(filename \\ "blinky") do
